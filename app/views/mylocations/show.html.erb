@@ -1,0 +1,43 @@
+<div ng-controller="ShowCtrl">
+  
+     
+  <label for="test"> In Map form</label>
+  <label class="myCheckbox">
+      <input type="checkbox" name="test" ng-true-value="A" ng-false-value="B" ng-model="checkB". ng-init='checkA="A"'/>
+      <span></span>
+  </label>
+  <label for="test1">In Tabular form</label>
+  <label class="myCheckbox">
+      <input type="checkbox" name="test1" ng-true-value="A" ng-false-value="B" ng-model="checkA". ng-init='checkB="A"' />
+      <span></span>
+  </label>
+<select ng-options="size for size in provinces" ng-model="selectedItem" ng-change="update()">
+</select>
+
+    <div ng-show="checkB == 'A'">
+<google-map center="map.center" zoom="map.zoom">
+<marker coords='{"latitude":53.4, "longitude":-0.23}'></marker>
+<marker ng-repeat="m in map.markers" coords="m" click="onMarkerClicked(m.id)">
+  <marker-label content="m.address" anchor="22 0" class="marker-labels"/>
+  <window ng-cloak show="map.infoWindowWithCustomClass.show" coords="map.infoWindowWithCustomClass.coords" isIconVisibleOnClick="false" options="map.infoWindowWithCustomClass.options">
+                      <p>More Details for the gas meter located at :{{ m.latitude | number:4 }}, {{ m.longitude | number:4 }}!</p>
+                      <p><a href="/gaslocations/{{m.id}}" style="display:block;">{{m.address}}</a></p>
+                      <p class="muted">My marker will stay open when the window is popped up!</p>
+              </window>
+  </marker>
+
+</google-map>
+  </div>
+  <div ng-show="checkA == 'A'">
+    <table ng-table="tableParams" class="mytable">
+            <tr ng-repeat="user in map.markers">
+                <td data-title="'Gas Meter Location'">
+                    <a href="/gaslocations/{{user.id}}" style="display:block;">{{user.address}}</a></td>
+                
+            </tr>
+        </table>
+    
+  </div>
+  
+</div>
+  

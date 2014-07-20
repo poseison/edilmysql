@@ -1,0 +1,140 @@
+
+
+
+<h1><%= @mylocation.address %></h1>
+
+
+<div ng-controller="RaffleCtrl">
+  
+ 
+<div id="wrap" style="position:relative;">
+  <div class="col-xs-12">
+    <div class="row">
+        <div class="col-xs-4"  style="background-color: #d9edf7;">
+  
+	<%= simple_form_for :user, :url => url_for(:action => 'pl', :controller=>'lct'),:html=>{:id=>"comment-form", :class=>"form-horizontal"}, :method=>'post', remote:true  do |f| %>
+	<fieldset>
+	  <legend><h2>Date:</h2></legend>
+
+	  <%= f.input :ndate, :as => :string, :input_html => { :class => 'jquery-ui-date' },ng: { model: 'newEntry.consumption'},label: 'Date:' %>
+	 
+  <select name="Status" ng-model="lchoice" required ng-options="status.value as status.display for status in status_options"> <option value="" selected>--Please select your preferences--</option></select> 
+
+
+	  </fieldset>
+	<% end %>
+  </div>
+  <div class="col-xs-8" style="background-color: #fcf8e3; height:200px;">
+   <table  class="topics">
+   <thead>
+     <tr>
+       <th>Average Consumption</th>
+       <th>Reading Date</th>
+        <th>{{avresult.msg0}}</th>
+       <th>{{avresult.msg1}}</th>
+       <th>{{avresult.msg2}}</th>
+     </tr>
+   </thead>
+   <tbody>
+       <tr>
+         <td>{{avresult.reading}}</td>
+         <td>{{avresult.readingdate}}</td>
+         <td>{{avresult.reading}}</td>
+         <td>0m3</td>
+         <td>0m3</td>
+       </tr>
+       <tr class="totalizer">
+         <td>Total:</td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>  
+       </tr>
+           
+   </tbody>
+   </table>
+  </div>
+  </div>
+  
+  
+  
+</div>
+</div>
+
+ 
+	<div id="wrap" style="position:relative;">
+		<div>
+			<div class="col-xs-12">
+			    <div class="row" id="confirmation_msg">
+			        <div class="col-xs-12 alert alert-success">
+			            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+			            <strong>Notice:</strong> Please specify the data interval
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-xs-4"  style="background-color: #d9edf7;">
+					<%= simple_form_for :user, :url => url_for(:action => 'plot', :controller=>'lchart'),:html=>{:id=>"comment-form", :class=>"form-horizontal"}, :method=>'post', remote:true  do |f| %>
+					<fieldset>
+					  <legend><h2>Plot by date</h2></legend>
+  
+					  <%= f.input :first_date, :as => :string, :input_html => { :class => 'jquery-ui-date' },ng: { model: 'newEntry.title'},label: 'First Date' %>
+					 <%= f.input :last_date, :as => :string, :input_html => { :class => 'jquery-ui-date' },ng: { model: 'newEntry.titleza'},label: 'Last Date' %>
+ 
+
+					  </fieldset>
+					<% end %>
+			        </div>
+			        <div class="col-xs-8" style="background-color: #fcf8e3; height:275px;">
+						<div>
+							<h3>Annual Charts</h3>
+						        <input type="checkbox" ng-true-value="A" ng-false-value="B" ng-model="checkA". ng-init='checkA="A"' />        
+						    </div>
+						<div>
+							<h3>Table with meters</h3>
+						<input type="checkbox" ng-true-value="A" ng-false-value="B" ng-model="checkB". ng-init='checkB="A"' />  	
+						</div>
+						</div>
+						</div>
+			        </div>
+			    </div>
+			</div>
+		 
+
+<linechart id="line-example" data-options="chart_options"></linechart>
+<div ng-show="checkA == 'A'">
+      
+
+ <barchart id="bar-example" data-options="bar_options"></barchart>
+    </div>
+ <div ng-show="checkB == 'A'">
+   <a class="btn btn-primary" ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv">Export to CSV</a>
+  
+<table ng-table="tableParams" class="mytable" export-csv="csv"  >
+        <tr ng-repeat="user in $data">
+            <td data-title="'Date - Time Captured'" sortable="capturedate">
+                {{user.capturedate}}
+            </td>
+            <td data-title="'Captured Value'">
+                {{user.capturevalue}}
+            </td>
+        </tr>
+    </table>
+    <script type="text/ng-template" id="custom/pager">
+            <ul class="pager ng-cloak">
+              <li ng-repeat="page in pages"
+                    ng-class="{'disabled': !page.active, 'previous': page.type == 'prev', 'next': page.type == 'next'}"
+                    ng-show="page.type == 'prev' || page.type == 'next'" ng-switch="page.type">
+                <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo; Previous</a>
+                <a ng-switch-when="next" ng-click="params.page(page.number)" href="">Next &raquo;</a>
+              </li>
+                <li> 
+                <div class="btn-group">
+                    <button type="button" ng-class="{'active':params.count() == 10}" ng-click="params.count(10)" class="btn btn-default">10</button>
+                    <button type="button" ng-class="{'active':params.count() == 25}" ng-click="params.count(25)" class="btn btn-default">25</button>
+                    <button type="button" ng-class="{'active':params.count() == 50}" ng-click="params.count(50)" class="btn btn-default">50</button>
+                    <button type="button" ng-class="{'active':params.count() == 100}" ng-click="params.count(100)" class="btn btn-default">100</button>
+                </div>
+                </li>
+            </ul>
+        </script>
+	</div>

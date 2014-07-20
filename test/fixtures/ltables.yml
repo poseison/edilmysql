@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fdate: 2014-04-20
+  ldate: 2014-04-20
+
+two:
+  fdate: 2014-04-20
+  ldate: 2014-04-20

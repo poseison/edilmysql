@@ -1,0 +1,17 @@
+
+<table id="locations" class="display">
+<thead>
+  <tr>
+    <th>Date</th>
+    <th>Value</th>
+  </tr>
+</thead>
+<tbody>
+  <% @dmeters.each do |location| %>
+    <tr>
+      <td><%= location.capturedate %></td>
+      <td><%= location.vslue %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

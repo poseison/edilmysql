@@ -1,0 +1,20 @@
+<h1>Products</h1>
+
+<table id="locations">
+<thead>
+  <tr>
+    <th>Product Name</th>
+    <th>Category</th>
+    <th>Release Date</th>
+  </tr>
+</thead>
+<tbody>
+  <% @locations.each do |location| %>
+    <tr>
+      <td><%= location.address %></td>
+      <td><%= location.longitude %></td>
+      <td><%= location.latitude %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>

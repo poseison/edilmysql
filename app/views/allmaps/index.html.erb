@@ -1,0 +1,323 @@
+
+<h1>Gas Meter Locations</h1>
+			
+    
+
+
+	 
+	<!-- Modal -->
+	
+				 
+<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+			    
+	<div id='piechart2' ></div>
+	
+	
+	
+	        
+    <table id="totalconsumpton">
+    <thead>
+      
+    </thead>
+    <tbody>
+     
+        <tr class="rowhighlight">
+          <td bgcolor="#FF0000"> Total Consumption until now in Nm3</td>
+          <td><%= @total%></td>      
+        </tr>
+ 
+    </tbody>
+    </table>
+
+    <table id="products">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Customer Name</th>
+        <th>Customer id</th>
+        <th>Meter id</th>
+        <th>Meter type</th>
+        <th>Total Consumption until now in cm3</th>
+        <th>Last Update</th>
+        <th>Actibvation Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @mylocations.each do |xlocation| %>
+        <tr>
+          <td><%= link_to xlocation.address, controller: "gaslocations", action: "show", id: xlocation.id%></td>
+          <td>Edil S.A.</td>
+          <td>12</td>
+          <td><%= xlocation.id %></td>
+          <td>ISBN 124</td>
+          <td><%= Gaslocation.last_meter(xlocation.id) %></td>
+          <td><%= Gaslocation.lastupdate(xlocation.id) %></td>
+          <td>01-01-2013</td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+
+
+<script>
+var mynewmarkes = <%=raw @hash.to_json %>;
+console.log('to mynewmarkes einai');
+console.log(mynewmarkes);
+var locationarray=[];
+var xlocations=[];
+var ylocations=[];
+var addresses=[];
+var ids=<%= @ids %>
+
+for (var i=0; i<mynewmarkes.length; i++){
+        console.log("Item name: "+name);
+        console.log("Source: "+mynewmarkes[i].lng);
+        console.log("ids: "+ids[i]);
+ylocations.push(mynewmarkes[i].lng);
+xlocations.push(mynewmarkes[i].lat);
+addresses.push(mynewmarkes[i].marker_title);
+        console.log("Target: "+mynewmarkes[i].marker_title);
+    }
+console.log(xlocations);
+var locations = [
+      ['<h4>Bondi Beach</h4>', -33.890542, 151.274856],
+      ['<h4>Coogee Beach</h4>', -33.923036, 151.259052],
+      ['<h4>Cronulla Beach</h4>', -34.028249, 151.157507],
+      ['<h4>Manly Beach</h4>', -33.80010128657071, 151.28747820854187],
+      ['<h4>Maroubra Beach</h4>', -33.950198, 151.259302]
+    ];
+    
+    // Setup the different icons and shadows
+    var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
+    
+    var icons = [
+      iconURLPrefix + 'red-dot.png',
+      iconURLPrefix + 'green-dot.png',
+      iconURLPrefix + 'blue-dot.png',
+      iconURLPrefix + 'orange-dot.png',
+      iconURLPrefix + 'purple-dot.png',
+      iconURLPrefix + 'pink-dot.png',      
+      iconURLPrefix + 'yellow-dot.png'
+    ]
+    var icons_length = icons.length;
+    
+    
+    var shadow = {
+      anchor: new google.maps.Point(15,33),
+      url: iconURLPrefix + 'msmarker.shadow.png'
+    };
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 100,
+      center: new google.maps.LatLng(38.069153, 23.805633),
+      mapTypeId: google.maps.MapTypeId.HYBRID,
+      mapTypeControl: true,
+      streetViewControl: true,
+      panControl: true,
+      zoomControlOptions: {
+         position: google.maps.ControlPosition.LEFT_BOTTOM
+      }
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+      maxWidth: 250
+    });
+
+    var marker;
+    var markers = new Array();
+    
+    
+    var iconCounter = 0;
+    
+    // Add the markers and infowindows to the map
+    for (var i = 0; i < xlocations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(xlocations[i], ylocations[i]),
+        map: map,
+        icon : icons[iconCounter],
+        shadow: shadow
+      });
+
+      markers.push(marker);
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+	var str='/gaslocations/'+ids[i];
+    
+	
+	
+	  
+	//	   infowindow.setContent(contentString);
+         infowindow.setContent('<div style="width: 100.0%; padding-left:0px; height: 100px;width:150px; float: left;color: #FFF;background: #ed1e79;line-height: 20px;border-radius:5px 5px 0px 0px;"><strong><b></b></strong>'+addresses[i]+'<br>'+'Last Meter:0007258'+'</div>'+'<a href="http://www.google.com/maps?'+
+		      'daddr=Aliso+Viejo,+CA" target="_blank">Driving Directions</a>');
+			  infowindow.open(map, marker);
+		$.ajax({
+			url:'/marklocations/'+ids[i],
+			type: "GET",
+			dataType: 'html',
+			success:function(data){
+			infowindow.setContent(data);
+			infowindow.open(map, marker);
+			
+				
+			}
+		});
+	
+	     
+          
+
+        }
+      })(marker, i));
+      
+      iconCounter++;
+      // We only have a limited number of possible icon colors, so we may have to restart the counter
+      if(iconCounter >= icons_length){
+      	iconCounter = 0;
+      }
+    }
+
+    function AutoCenter() {
+      //  Create a new viewpoint bound
+      var bounds = new google.maps.LatLngBounds();
+      //  Go through each...
+      $.each(markers, function (index, marker) {
+        bounds.extend(marker.position);
+      });
+      //  Fit these bounds to the map
+      map.fitBounds(bounds);
+    }
+   
+
+</script>
+   
+
+
+
+</div>
+
+	<div ng-controller="DemoCtrl"> 
+    
+    
+    
+    
+   
+  	
+  
+		
+			
+  	
+		<div class="col-xs-12">
+		    <div class="row" id="confirmation_msg">
+		        <div class="col-xs-12 alert alert-success">
+		            <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+		            <strong>Notice:</strong> Please specify data and choose your preferred meterings
+		        </div>
+		    </div>
+		    <div class="row">
+		        <div class="col-xs-4"  style="background-color: #d9edf7;">
+		   		 <%= simple_form_for :user, :url => url_for(:action => 'plot', :controller=>'lchart'),:html=>{:id=>"comment-form", :class=>"form-horizontal"}, :method=>'post', remote:true  do |f| %>
+		   		 <fieldset>
+		   		   <legend><h2>Aggregate Results</h2></legend>
+  
+		   		   <%= f.input :first_date, :as => :string, :input_html => { :class => 'jquery-ui-date' },ng: { model: 'checkOut'},label: 'Specify Date' %>
+		 
+
+		   		   </fieldset>
+		   		 <% end %>
+		        </div>
+		        <div class="col-xs-8" style="background-color: #fcf8e3; height:200px;">
+			   		<p>
+			   		<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="firstpost(); setlit(); dailytitleza() ">
+			   		  Daily Data
+			   		</button>
+			   	</p>
+				<br>
+				<br>
+			   	<p>
+			   		<button type="button" class="btn btn-primary btn-lg btn-block" ng-click="submit2(); setlit(); monthtitleza()">
+			   		  Monthly Data
+			   		</button>
+			   	</p>
+		        </div>
+		    </div>
+		</div>
+		
+		<br></br>
+		<br></br>
+		<br></br>
+		
+		<p>
+			
+
+	
+		<h1>{{checkOut}} </h1>
+     <a class="btn btn-primary" ng-mousedown="csv.generate()" ng-href="{{ csv.link() }}" download="test.csv">Export to CSV</a>
+     
+	<table ng-table="tableParams" class="mytable" export-csv="csv">
+		
+			
+		<thead>
+			<colgroup>
+				<col />
+				
+			</colgroup>
+		  <tr>
+		    <th ng-class="{sorting_asc: (sortField == 'code' && sortDir == 'asc'), sorting_desc: (sortField == 'code' && sortDir == 'desc'), sorting: (sortField != 'code')}"  ng-click="sortBy('code')">Adrress</th>
+		    <th ng-class="{sorting_asc: (sortField == 'name' && sortDir == 'asc'), sorting_desc: (sortField == 'name' && sortDir == 'desc'), sorting: (sortField != 'name')}" ng-click="sortBy('name')">{{titlos}} metering 1 for {{checkOut}}</th>
+			 <th ng-class="{sorting_asc: (sortField == 'name' && sortDir == 'asc'), sorting_desc: (sortField == 'name' && sortDir == 'desc'), sorting: (sortField != 'name')}" ng-click="sortBy('name')">{{titlos}} metering 2 for {{checkOut}}</th>
+		  
+		</thead>
+        <tr ng-repeat="user in dailydata" >
+            <td data-title="'Address'"><a href="/gaslocations/{{user.id}}" style="display:block;">{{user.streetname}}</a></td>
+            <td data-title="'Data Meterings'">{{user.value1}}</td>
+			 <td data-title="'Data Meterings'">{{user.value2}}</td>
+			
+        </tr>
+        </table>
+	        <span ng-show="literate">
+			 
+				<barchart id="mybar-example" data-options="mybar_options" ></barchart>
+			</span>
+		
+
+		
+	  
+	  	
+	  	</div>
+      
+		  	<script type="text/javascript">
+		  	      google.load("visualization", "1", {packages:["corechart"]});
+		  	      google.setOnLoadCallback(drawChart);
+		  	  	var mynewpies = <%=raw @gauges %>;
+		  	  	console.log(mynewpies);
+		  	      function drawChart() {
+		  	        var data = google.visualization.arrayToDataTable(mynewpies);
+
+					var options = {
+					  'legend':'right',
+					  'title':'Total Consumption',
+					  'chartArea':{left:40,top:0,width:1000,height:600},
+					  'is3D':true,
+					  'labels':'value',
+					  'alignment':'left',
+					  'autocscale': true,
+					  'slices': {0: {offset: 0.1}},
+					  'Label' : {position: 'left', maxLines: 5}
+					}
+		  	        
+		  	        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+		  	        chart.draw(data, options);
+		  	      }
+		  	    </script>	
+				<script type="text/javascript">
+				    var blink = function(){
+				        $('#announcementbox').toggle();
+				    };
+				    $(document).ready(function() {
+				        setInterval(blink, 10000);
+				    });
+				</script>  
+	  	
+	
+	
+</div>

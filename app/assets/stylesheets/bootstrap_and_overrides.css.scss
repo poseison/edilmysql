@@ -1,0 +1,30 @@
+$iconSpritePath: image-path('glyphicons-halflings.png');
+$iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+
+$navbarBackground: #555;
+$navbarBackgroundHighlight: #888;
+$navbarText: #eee;
+$navbarLinkColor: #eee;
+@import "bootstrap.min";
+@import "bootstrap";
+@import "bootstrap-theme.min";
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  
+}
+
+
+/* Override Rail's default error calls with Bootstrap 3 */
+.field_with_errors {
+  @extend .has-error;
+}
+
+/* Override Bootstrap 3 font location */
+
+.navbar .brand {
+  color: #FAFFB8;
+}

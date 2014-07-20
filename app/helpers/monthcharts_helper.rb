@@ -1,0 +1,2 @@
+module MonthchartsHelper
+end

@@ -1,0 +1,2 @@
+module GaslocationsHelper
+end
