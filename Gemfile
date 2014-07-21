@@ -12,10 +12,9 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'underscore-rails'
 gem 'high_voltage'
 gem 'angularjs-rails'
-
 gem 'formtastic'
-
-
+gem 'yaml_db'
+gem 'mysql2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -33,7 +32,7 @@ gem 'angular-ui-bootstrap-rails'
 gem 'morrisjs-rails'
 gem 'raphael-rails'
 gem "font-awesome-rails"
-gem 'ng-table-rails', '~> 0.0.1'
+# gem 'ng-table-rails', '~> 0.0.1'
 gem "bower-rails", "~> 0.7.2"
 gem 'sidekiq'
 gem 'whenever', require:false
