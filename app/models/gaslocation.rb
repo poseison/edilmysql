@@ -12,7 +12,9 @@ class Gaslocation < ActiveRecord::Base
      if @lmeter.size <=0 then 
         ln=0
       else
-        ln=@lmeter.last.vslue
+        l1=@lmeter.first[:vslue]
+        l2=@lmeter.last[:vslue]
+        ln=l2-l1
       end
       ln
    end
@@ -39,7 +41,7 @@ class Gaslocation < ActiveRecord::Base
         return 0
       end
      @gmeters.each do |x|
-       if (x.capturedate>=start) && (x.capturedate-1.day<=last) 
+       if (x.capturedate>=start) && (x.capturedate<=last) 
          @nmeters<<{capturedate: x.capturedate,capturevalue:x.vslue}
        end
      end
@@ -51,7 +53,7 @@ class Gaslocation < ActiveRecord::Base
        @nmeters.each do |val|
         total += val[:capturevalue]
        end
-       average=total/@nmeters.size
+       average=total
        puts 'tHE AVERAGE IS'
        puts average
      x=@nmeters[0]
