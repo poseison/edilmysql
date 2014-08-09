@@ -33,7 +33,7 @@ gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'
 gem 'ransack'
 gem 'gon'
-
+gem 'active_admin_importable'
 gem "google_visualr", ">= 2.1"
 gem 'angular-ui-bootstrap-rails'
 gem 'morrisjs-rails'
