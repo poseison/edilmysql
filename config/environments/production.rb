@@ -30,7 +30,7 @@ Mygasmeter::Application.configure do
   config.assets.compile = true
 
  
-  config.assets.precompile << /\A(?!active_admin).*\.(js|scss)\z/
+  config.assets.precompile << /\A(?!active_admin).*\.(js|scss|coffee)\z/
   # Generate digests for assets URLs.
   config.assets.digest = true
 
