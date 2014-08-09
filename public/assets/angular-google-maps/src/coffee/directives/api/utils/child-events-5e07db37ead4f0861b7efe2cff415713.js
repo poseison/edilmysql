@@ -1,0 +1,1 @@
+(function(){this.ngGmapModule("directives.api.utils",function(){return this.ChildEvents={onChildCreation:function(){}}})}).call(this);

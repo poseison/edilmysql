@@ -1,0 +1,1 @@
+basePath="",files=[JASMINE,JASMINE_ADAPTER,"bower_components/angular/angular.js","bower_components/angular-sanitize/angular-sanitize.js","bower_components/angular-mocks/angular-mocks.js","src/ng-csv/*.js","src/ng-csv/directives/*.js","test/unit/**/*.js","test/unit/**/**/*.js"],autoWatch=!0,browsers=["Chrome"],junitReporter={outputFile:"test_out/unit.xml",suite:"unit"};

@@ -1,0 +1,1 @@
+function InfoController(e){e.templateValue="hello from the template itself"}

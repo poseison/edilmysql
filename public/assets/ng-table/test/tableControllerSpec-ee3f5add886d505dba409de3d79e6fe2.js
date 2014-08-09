@@ -1,0 +1,1 @@
+describe("ngTableParams",function(){beforeEach(module("ngTable"))});

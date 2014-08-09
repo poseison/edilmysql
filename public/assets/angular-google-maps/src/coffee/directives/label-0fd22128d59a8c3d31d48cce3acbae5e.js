@@ -1,0 +1,1 @@
+(function(){angular.module("google-maps").directive("markerLabel",["$log","$timeout",function(e,i){return new directives.api.Label(i)}])}).call(this);

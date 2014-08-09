@@ -1,0 +1,1 @@
+(function(){angular.module("google-maps").directive("layer",["$timeout",function(e){return new directives.api.Layer(e)}])}).call(this);

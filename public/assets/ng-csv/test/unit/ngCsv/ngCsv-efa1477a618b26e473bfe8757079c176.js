@@ -1,0 +1,1 @@
+"use strict";describe("ngCsv",function(){var e,n;n=[];var t=function(e){return n.indexOf(e)>=0};beforeEach(function(){e=angular.module("ngCsv"),n=e.requires}),it("should load config module",function(){expect(t("ngCsv.config")).toBeTruthy()}),it("should load directives module",function(){expect(t("ngCsv.directives")).toBeTruthy()})});

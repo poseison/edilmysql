@@ -1,0 +1,1 @@
+(function(){angular.module("google-maps").controller("PolylineDisplayController",["$scope",function(o){return o.toggleStrokeColor=function(){return o.stroke.color="#6060FB"===o.stroke.color?"red":"#6060FB"}}])}).call(this);

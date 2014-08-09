@@ -1,0 +1,1 @@
+(function(){this.ngGmapModule=function(n,t){var l,i;return null==t&&(t=function(){}),"string"==typeof n&&(n=n.split(".")),l=this[i=n.shift()]||(this[i]={}),l.ngGmapModule||(l.ngGmapModule=this.ngGmapModule),n.length?l.ngGmapModule(n,t):t.call(l)}}).call(this);

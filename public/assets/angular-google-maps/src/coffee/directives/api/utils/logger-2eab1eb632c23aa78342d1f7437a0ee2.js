@@ -1,0 +1,1 @@
+(function(){this.ngGmapModule("directives.api.utils",function(){var o;return this.Logger={logger:void 0,doLog:!1,info:function(r){return o.doLog?null!=o.logger?o.logger.info(r):console.info(r):void 0},error:function(r){return o.doLog?null!=o.logger?o.logger.error(r):console.error(r):void 0}},o=this.Logger})}).call(this);
