@@ -70,11 +70,15 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-group :production do
- gem 'libv8', '~> 3.11.8.3'
- gem 'therubyracer', :platform => :ruby
+gem 'foreman'
+group :production, :staging do
+  gem 'rails_12factor'
+  gem 'rails_stdout_logging'
+  gem 'rails_serve_static_assets'
+  gem 'libv8', '~> 3.11.8.3'
+  gem 'therubyracer', :platform => :ruby
 end
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
