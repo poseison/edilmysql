@@ -12,7 +12,8 @@ Mygasmeter::Application.configure do
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = true
+  config.action_controller.perform_caching = false
+  config.assets.precompile += %w( angular.js )
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -33,7 +34,6 @@ Mygasmeter::Application.configure do
   config.assets.compile = true
   
  
-  config.assets.precompile << /\A(?!active_admin).*\.(js|scss|coffee)\z/
   
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -65,7 +65,7 @@ Mygasmeter::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-   config.assets.precompile += %w( application.js )
+  
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

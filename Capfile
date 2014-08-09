@@ -10,7 +10,7 @@ require "whenever/capistrano"
 # require 'capistrano/rbenv'
 # set :rbenv_type, :user # or :system, depends on your rbenv setup
 # set :rbenv_ruby, '2.0.0-p451'
-
+load 'deploy/assets'
 # If you are using rvm add these lines:
 require 'capistrano/rvm'
 set :rvm_type, :user

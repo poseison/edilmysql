@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -8,9 +9,12 @@ Bundler.require(:default, Rails.env)
 
 module Mygasmeter
   class Application < Rails::Application
+    config.assets.enabled = true
+    config.assets.css_compressor = :yui
+    config.assets.js_compressor = :uglify
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     config.encoding = "utf-8"
-    config.assets.precompile.shift
+    config.assets.compile = true
 
     # Add additional asset pathes
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
