@@ -1,5 +1,6 @@
 set :application, 'edilmysql'
-set :repo_url, 'git@github.com:poseison/edilmysql.git'
+set :repo_url, 'https://github.com/poseison/edilmysql.git'
+
 server '178.62.18.183', user: 'deploy', roles: %w{web app}
 
 set :deploy_to, '/home/deploy/myapp'

@@ -11,8 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
-//= require jquery.ui.datepicker
+//= require jquery-ui/datepicker
 //= require dataTables/jquery.dataTables
 //= require bootstrap
 //= require underscore
@@ -33,9 +34,5 @@
 //= require chartangular
 //= require ng-table
 //= require angular-turbolinks
-//= require bootstrap-datetimepicker
-//= require bootstrap-datetimepicker/core
-//= require bootstrap-datetimepicker/pickers
-//= require bootstrap-datetimepicker/locales/bootstrap-datetimepicker.hu.js
 //= require_tree .
 $("input.date_picker").datepicker();
