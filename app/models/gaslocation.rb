@@ -5,17 +5,32 @@ class Gaslocation < ActiveRecord::Base
   accepts_nested_attributes_for :gasmeters, :allow_destroy => true
    geocoded_by :address
    after_validation :geocode, :if => :address_changed?
+   def self.totalconsumption(gl)
+     @gaslocation=Gaslocation.find(gl)
+     @lmeter=Array.new
+     @lmeter=@gaslocation.gasmeters
+     ln=0   
+     if @lmeter.size <=0 then 
+        ln=0
+      else
+        @lmeter.each do |x|
+          ln=ln+x.vslue
+        end
+      end
+      ln  
+   end
    def self.last_meter(gl)
      @gaslocation=Gaslocation.find(gl)
      @lmeter=Array.new
      @lmeter=@gaslocation.gasmeters
+     ln=0
      if @lmeter.size <=0 then 
         ln=0
       else
-        l1=@lmeter.first[:vslue]
-        l2=@lmeter.last[:vslue]
-        ln=l2-l1
+        @lmeter.each do |x| 
+            ln=ln+x.vslue
       end
+    end
       ln
    end
    def self.lastupdate(gl)
