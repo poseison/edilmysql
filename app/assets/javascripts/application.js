@@ -11,9 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
-//= require jquery-ui/datepicker
 //= require dataTables/jquery.dataTables
 //= require bootstrap
 //= require underscore
@@ -21,18 +19,17 @@
 //= require raphael
 //= require morris
 //= require moment
-//= require angular/angular.js
-//= require angular-resource/angular-resource.js
-//= require angular-ui-bootstrap-bower/ui-bootstrap.js
-//= require angular-route/angular-route
-//= require ng-table/ng-table
-//= require ng-table-export/ng-table-export
-//= require angular-ui-bootstrap-bower/ui-bootstrap-tpls.js
+//= require bootstrap
+//= require angular/angular
+//= require angular-resource
+//= require angular-ui-bootstrap
+//= require angular-ui-bootstrap-bower
+//= require angular-route
 //= require angular-google-maps/dist/angular-google-maps.min
 //= require angular-google-chart/ng-google-chart
-//= require underscore/underscore-min
-//= require chartangular
 //= require ng-table
-//= require angular-turbolinks
+//= require ng-table-export/ng-table-export
+//= require leaflet
 //= require_tree .
+
 $("input.date_picker").datepicker();

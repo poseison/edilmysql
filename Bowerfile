@@ -1,12 +1,6 @@
 # A sample Bowerfile
 # Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
 
-asset 'angular', '1.2.13'
-asset 'angular-route'
-asset 'angular-resource'
-asset 'angular-mocks'
-asset 'angular-ui-bootstrap-bower'
+
 asset 'angular-google-maps'
-asset 'angular-google-chart'
 asset 'ng-table-export'
-asset 'ng-table'

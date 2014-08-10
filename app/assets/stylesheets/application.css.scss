@@ -12,15 +12,14 @@
  *= require dataTables/src/demo_table_jui
  *= require morris
  *= require formtastic
- *= require ng-table
+ *= require bootstrap
+ *= require leaflet
  *= require_self
  *= require_tree .
  */
 
 
 
-@import "bootstrap/bootstrap.scss";
-@import "font-awesome";
 
 /* navbar */
 

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+source 'https://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
@@ -50,6 +50,18 @@ gem 'bootstrap3-datetimepicker-rails', '~> 3.0.0'
 gem 'datetimepicker-rails', :require => 'datetimepicker-rails', :git => 'git://github.com/zpaulovics/datetimepicker-rails.git'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
+gem 'rails-assets-bootstrap'
+gem 'rails-assets-angular'
+gem 'rails-assets-leaflet'
+gem 'rails-assets-angular-resource'
+gem 'rails-assets-ui-bootstrap'
+gem 'rails-assets-angular-ui-bootstrap'
+gem 'rails-assets-angular-ui-bootstrap-bower'
+gem 'rails-assets-ui-bootstrap'
+gem 'rails-assets-angular-route'
+gem 'rails-assets-ng-table'
+gem 'rails-assets-angular-google-maps'
+
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

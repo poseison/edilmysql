@@ -38,6 +38,7 @@ GIT
 
 GEM
   remote: https://rubygems.org/
+  remote: https://rails-assets.org/
   specs:
     actionmailer (4.0.0)
       actionpack (= 4.0.0)
@@ -187,6 +188,25 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.0)
       sprockets-rails (~> 2.0.0)
+    rails-assets-angular (1.2.21)
+    rails-assets-angular-google-maps (1.2.0)
+      rails-assets-angular (~> 1.2.0)
+      rails-assets-lodash (~> 2.4.1)
+    rails-assets-angular-resource (1.2.21)
+      rails-assets-angular (= 1.2.21)
+    rails-assets-angular-route (1.2.21)
+      rails-assets-angular (= 1.2.21)
+    rails-assets-angular-ui-bootstrap (0.11.0)
+    rails-assets-angular-ui-bootstrap-bower (0.11.0)
+      rails-assets-angular (>= 1)
+    rails-assets-bootstrap (3.2.0)
+      rails-assets-jquery (>= 1.9.0)
+    rails-assets-jquery (2.1.1)
+    rails-assets-leaflet (0.7.3)
+    rails-assets-lodash (2.4.1)
+    rails-assets-ng-table (0.3.3)
+      rails-assets-angular (~> 1)
+    rails-assets-ui-bootstrap (0.11.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -317,6 +337,16 @@ DEPENDENCIES
   mysql2
   populator
   rails (= 4.0.0)
+  rails-assets-angular
+  rails-assets-angular-google-maps
+  rails-assets-angular-resource
+  rails-assets-angular-route
+  rails-assets-angular-ui-bootstrap
+  rails-assets-angular-ui-bootstrap-bower
+  rails-assets-bootstrap
+  rails-assets-leaflet
+  rails-assets-ng-table
+  rails-assets-ui-bootstrap
   rails_12factor
   rails_serve_static_assets
   rails_stdout_logging
