@@ -1,0 +1,1 @@
+(function(){angular.module("google-maps.directives.api.utils").service("CtrlHandle",["$q",function(e){var r;return r={handle:function(r){return r.deferred=e.defer(),{getScope:function(){return r}}},mapPromise:function(e,r){var n;return n=r.getScope(),n.deferred.promise.then(function(r){return e.map=r}),n.deferred.promise}}}])}).call(this);

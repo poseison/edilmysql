@@ -1,0 +1,1 @@
+(function(){angular.module("google-maps").directive("FreeDrawPolygons".ns(),["FreeDrawPolygons",function(e){return new e}])}).call(this);

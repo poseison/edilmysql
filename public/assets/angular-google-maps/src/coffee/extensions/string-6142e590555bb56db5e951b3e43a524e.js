@@ -1,0 +1,1 @@
+(function(){String.prototype.contains=function(t,n){return-1!==this.indexOf(t,n)},String.prototype.flare=function(t){return null==t&&(t="nggmap"),t+this},String.prototype.ns=String.prototype.flare}).call(this);

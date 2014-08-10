@@ -1,37 +1,33 @@
-###
-Markers will map icon and coords differently than directibes.api.Marker. This is because Scope and the model marker are
-not 1:1 in this setting.
-	
-	- icon - will be the iconKey to the marker value ie: to get the icon marker[iconKey]
-	- coords - will be the coordsKey to the marker value ie: to get the icon marker[coordsKey]
+angular.module("google-maps.directives.api")
+.factory "Markers", ["IMarker", "MarkersParentModel", (IMarker, MarkersParentModel) ->
+  class Markers extends IMarker
+    constructor: ($timeout) ->
+      super($timeout)
+      @template = '<span class="angular-google-map-markers" ng-transclude></span>'
+      @scope = _.extend @scope or {},
+        idKey: '=idkey' #id key to bind to that makes a model unique, if it does not exist default to rebuilding all markers
+        doRebuildAll: '=dorebuildall' #root level directive attribute not a model level, should default to false
+        models: '=models'
+        doCluster: '=docluster'
+        clusterOptions: '=clusteroptions'
+        clusterEvents: '=clusterevents'
+        isLabel: '=islabel' #if is truthy consult http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/docs/reference.html for additional options documentation
 
-    - watches from IMarker reflect that the look up key for a value has changed and not the actual icon or coords itself
-    - actual changes to a model are tracked inside directives.api.model.MarkerModel
+      @$timeout = $timeout
+      @$log.info @
 
-###
-@ngGmapModule "directives.api", ->
-    class @Markers extends directives.api.IMarker
-        constructor: ($timeout, $injector) ->
-            super($timeout)
-            self = @
-            @template = '<span class="angular-google-map-markers" ng-transclude></span>'
+    controller: ['$scope', '$element', ($scope, $element) ->
+      $scope.ctrlType = 'Markers'
+      IMarker.handle $scope,$element
+    ]
 
-            @scope.models = '=models'
-            @scope.doCluster = '=docluster'
-            @scope.clusterOptions = '=clusteroptions'
-            @scope.fit = '=fit'
-            @scope.labelContent = '=labelcontent'
-            @scope.labelAnchor = '@labelanchor'
-            @scope.labelClass = '@labelclass'
-
-            @$timeout = $timeout
-            @$injector = $injector
-            @$log.info(@)
-
-        controller: ['$scope', '$element', ($scope, $element) ->
-            getMarkersScope: ->
-                $scope
-        ]
-
-        link: (scope, element, attrs, ctrl) =>
-            new directives.api.models.parent.MarkersParentModel(scope, element, attrs, ctrl, @$timeout, @$injector)
+    link: (scope, element, attrs, ctrl) =>
+      IMarker.mapPromise(scope, ctrl).then (map) =>
+        parentModel = new MarkersParentModel(scope, element, attrs, map, @$timeout)
+        scope.deferred.resolve()
+        if scope.control?
+          scope.control.getGMarkers = =>
+            parentModel.gMarkerManager?.getGMarkers()
+          scope.control.getChildMarkers = =>
+            parentModel.markerModels
+]

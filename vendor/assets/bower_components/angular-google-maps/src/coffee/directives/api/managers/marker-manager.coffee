@@ -1,61 +1,73 @@
-@ngGmapModule "directives.api.managers", ->
-	class @MarkerManager extends oo.BaseObject
-		constructor: (gMap,opt_markers,opt_options) ->
-			super()
-			self = @
-			@gMap = gMap
-			@gMarkers = []
-			@$log = directives.api.utils.Logger
-			@$log.info(@)
-		add:(gMarker,optDraw)=>
-			@handleOptDraw(gMarker,optDraw,true)
-			@gMarkers.push(gMarker)
-		addMany:(gMarkers)=>
-			@add(gMarker) for gMarker in gMarkers
+angular.module("google-maps.directives.api.managers")
+.factory "MarkerManager", ["Logger", "FitHelper", "PropMap", (Logger, FitHelper, PropMap) ->
+  class MarkerManager extends FitHelper
+    @include FitHelper
+    constructor: (gMap, opt_markers, opt_options) ->
+      super()
+      @gMap = gMap
+      @gMarkers = new PropMap()
+      @$log = Logger
+      @$log.info(@)
 
-		remove:(gMarker,optDraw)=>
-			@handleOptDraw(gMarker,optDraw,false)
-			unless optDraw
-				return
-			index = undefined
-			if @gMarkers.indexOf?
-				index = @gMarkers.indexOf(gMarker)
-			else 
-				tempIndex = 0
-				_.find(@gMarkers, (marker) ->
-					tempIndex += 1
-					if marker == gMarker
-						index = tempIndex
-						return
-				)
-			if index?
-				@gMarkers.splice(index, 1)
+    add: (gMarker, optDraw = true)=>
+      unless gMarker.key?
+        msg = "gMarker.key undefined and it is REQUIRED!!"
+        Logger.error msg
+        throw msg
+      exists = (@gMarkers.get gMarker.key)?
+      if !exists
+        @handleOptDraw(gMarker, optDraw, true)
+        @gMarkers.put gMarker.key, gMarker
 
-		removeMany:(gMarkers)=>
-			@remove(marker) for marker in @gMarkers 
+    addMany: (gMarkers)=>
+      gMarkers.forEach (gMarker) =>
+        @add(gMarker)
 
-		draw:=>
-			deletes = []
-			for gMarker in @gMarkers
-				do(gMarker)=>
-					unless gMarker.isDrawn
-						if gMarker.doAdd
-							gMarker.setMap(@gMap) 
-						else 
-							deletes.push(gMarker)
+    remove: (gMarker, optDraw = true)=>
+      @handleOptDraw gMarker, optDraw, false
+      if @gMarkers.get gMarker.key
+        @gMarkers.remove gMarker.key
 
-			@remove(gMarker,true) for gMarker in deletes
+    removeMany: (gMarkers)=>
+      @gMarkers.values().forEach (marker) =>
+        @remove(marker)
 
+    draw: =>
+      deletes = []
+      @gMarkers.values().forEach (gMarker) =>
+        unless gMarker.isDrawn
+          if gMarker.doAdd
+            gMarker.setMap(@gMap)
+            gMarker.isDrawn = true
+          else
+            deletes.push(gMarker)
 
-		clear:=>
-			gMarker.setMap(null) for gMarker in @gMarkers
-			delete @gMarkers
-			@gMarkers = []
+      deletes.forEach (gMarker) =>
+        gMarker.isDrawn = false
+        @remove(gMarker, true)
 
-		handleOptDraw:(gMarker,optDraw,doAdd)=>
-			if optDraw == true
-				if doAdd then gMarker.setMap(@gMap) else gMarker.setMap(null) 
-				gMarker.isDrawn = true
-			else 
-				gMarker.isDrawn = false
-				gMarker.doAdd = doAdd
+    clear: =>
+      @gMarkers.values().forEach (gMarker) ->
+        gMarker.setMap null
+      delete @gMarkers
+      @gMarkers = new PropMap()
+
+    handleOptDraw: (gMarker, optDraw, doAdd)=>
+      if optDraw == true
+        if doAdd
+          gMarker.setMap @gMap
+        else
+          gMarker.setMap null
+        gMarker.isDrawn = true
+      else
+        gMarker.isDrawn = false
+        gMarker.doAdd = doAdd
+
+    fit: ()=>
+      super @getGMarkers(), @gMap
+
+    getGMarkers: =>
+      @gMarkers.values()
+
+  MarkerManager
+]

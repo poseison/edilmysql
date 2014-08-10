@@ -1,0 +1,1 @@
+angular.module("app",["google-maps"]).controller("mainCtrl",["$scope",function(o){o.number=0,o.map={center:{latitude:40.1451,longitude:-99.668},zoom:4,marker:{id:0,coords:{latitude:40.1451,longitude:-99.668}}},o.click=function(){o.number+=1}}]);

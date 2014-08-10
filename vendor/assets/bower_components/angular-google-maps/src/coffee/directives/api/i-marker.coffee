@@ -5,27 +5,29 @@
  			- coords
  			- icon
 		- implementation needed on watches
-###	
-@ngGmapModule "directives.api", ->
-	class @IMarker extends oo.BaseObject
-		constructor: ($timeout) ->
-			self = @
-			@$log = directives.api.utils.Logger
-			@$timeout = $timeout
-			@restrict = 'ECMA'
-			@require = '^googleMap'
-			@priority = -1
-			@transclude = true
-			@replace = true
-			@scope =
-				coords: '=coords',
-				icon: '=icon',
-				click: '&click',
-				options: '=options',
-				events: '=events'
+###
+angular.module("google-maps.directives.api")
+.factory "IMarker", [ "Logger", "BaseObject", "CtrlHandle", (Logger, BaseObject, CtrlHandle)->
+  class IMarker extends BaseObject
+    @extend CtrlHandle
+    constructor: ->
+      @$log = Logger
+      @restrict = 'EMA'
+      @require = '^googleMap'
+      @priority = -1
+      @transclude = true
+      @replace = true
+      @scope =
+        coords: '=coords'
+        icon: '=icon'
+        click: '&click'
+        options: '=options'
+        events: '=events'
+        fit: '=fit'
+        idKey: '=idkey' #id key to bind to that makes a model unique, if it does not exist default to rebuilding all markers
+        control: '=control'
 
-		controller: ['$scope','$element', ($scope, $element) ->
-			throw new Exception("Not Implemented!!")
-		]
-		link: (scope, element, attrs, ctrl) =>
-			throw new Exception("Not implemented!!")
+    link: (scope, element, attrs, ctrl) =>
+      throw new Error "No Map Control! Marker Directive Must be inside the map!" unless ctrl
+]
+

@@ -1,0 +1,1 @@
+(function(){describe("WindowsParentModel",function(){return beforeEach(function(){return angular.mock.module("google-maps.directives.api.models.parent"),inject($rootScope,$timeout,$compile,$http,$templateCache,$interpolate)(function(e){return function(){return e.scope=$rootScope.$new(),e.subject=new WindowsParentModel(e.scope)}}(this))})})}).call(this);

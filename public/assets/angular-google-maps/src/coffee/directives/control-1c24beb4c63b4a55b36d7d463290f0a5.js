@@ -1,0 +1,1 @@
+(function(){angular.module("google-maps").directive("mapControl",["Control",function(n){return new n}])}).call(this);
