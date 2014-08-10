@@ -23,10 +23,10 @@
 //= require moment
 //= require angular/angular
 //= require angular-resource/angular-resource
+//= require angular-ui-bootstrap-bower/ui-bootstrap.js
 //= require angular-route/angular-route
 //= require ng-table/ng-table
 //= require ng-table-export/ng-table-export
-//= require angular-ui-bootstrap-bower/ui-bootstrap.js
 //= require angular-ui-bootstrap-bower/ui-bootstrap-tpls.js
 //= require angular-google-maps/dist/angular-google-maps.min
 //= require angular-google-chart/ng-google-chart
