@@ -21,8 +21,8 @@
 //= require raphael
 //= require morris
 //= require moment
-//= require angular/angular
-//= require angular-resource/angular-resource
+//= require angular/angular.js
+//= require angular-resource/angular-resource.js
 //= require angular-ui-bootstrap-bower/ui-bootstrap.js
 //= require angular-route/angular-route
 //= require ng-table/ng-table
