@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require angular
 //= require jquery
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
@@ -20,7 +21,6 @@
 //= require morris
 //= require moment
 //= require bootstrap
-//= require angular/angular
 //= require angular-resource
 //= require angular-ui-bootstrap
 //= require angular-ui-bootstrap-bower
