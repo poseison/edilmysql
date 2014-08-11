@@ -359,6 +359,7 @@ DEPENDENCIES
   simple_form_angular
   sinatra
   slim
+  sprockets-rails
   sqlite3
   therubyracer
   uglifier (>= 1.3.0)
