@@ -7,18 +7,6 @@ jQuery ->
   $('#article_published_on').datepicker
     dateFormat: 'yy-mm-dd'
 
-app = angular.module("Raffler", [
-  "ng"
-  "ngResource"
-  "ui.bootstrap"
-  "ngRoute"
-  "ngTable"
-  "ngTableExport"
-  "ChartAngular"
-  "google-maps"
-  "googlechart"
-])
-
 DemoTestCtrl = undefined
 app = undefined
 __extends_ = undefined
@@ -473,7 +461,17 @@ __extends_ = (child, parent) ->
       $defer.resolve $scope.dailydata.slice((params.page() - 1) * params.count(), params.page() * params.count())
   )
 
-
+app = angular.module("Raffler", [
+  "ng"
+  "ngResource"
+  "ui.bootstrap"
+  "ngRoute"
+  "ngTable"
+  "ngTableExport"
+  "ChartAngular"
+  "google-maps"
+  "googlechart"
+])
 app.controller "DemoCtrl", DemoCtrl
 @BaseCtrl = (->
   BaseCtrl = undefined

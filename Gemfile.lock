@@ -343,6 +343,7 @@ DEPENDENCIES
   rails-assets-angular-ui-bootstrap-bower
   rails-assets-bootstrap
   rails-assets-leaflet
+  rails-assets-lodash
   rails-assets-ng-table
   rails-assets-ui-bootstrap
   rails_12factor

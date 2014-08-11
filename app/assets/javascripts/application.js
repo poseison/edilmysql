@@ -21,6 +21,7 @@
 //= require morris
 //= require moment
 //= require bootstrap
+//= require lodash
 //= require angular-resource
 //= require angular-ui-bootstrap
 //= require angular-ui-bootstrap-bower
@@ -29,6 +30,7 @@
 //= require angular-google-chart/ng-google-chart
 //= require ng-table
 //= require ng-table-export/ng-table-export
+//= require chartangular
 //= require leaflet
 //= require_tree .
 
