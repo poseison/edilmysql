@@ -39,9 +39,8 @@ gem 'angular-ui-bootstrap-rails'
 gem 'morrisjs-rails'
 gem 'raphael-rails'
 gem "font-awesome-rails"
-gem 'sprockets-rails'
-# gem 'ng-table-rails', '~> 0.0.1'
-gem "bower-rails", "~> 0.7.2"
+
+
 gem 'sidekiq'
 gem 'whenever', require:false
 gem 'sinatra', require: false
